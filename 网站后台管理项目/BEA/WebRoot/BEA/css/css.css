@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+.subitem {
+	width: 737px;
+	height: 430px;
+	left: 203px;
+	top: 5px;
+	background-color: #fff;
+	position: absolute;
+	box-shadow: 0 0 8px #ddd;
+	z-index: 999;
+}
+
+.hidden {
+	display: none;
+}

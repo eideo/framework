@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans
+						 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+					     http://www.springframework.org/schema/tx 
+					     http://www.springframework.org/schema/tx/spring-tx.xsd 
+					     http://www.springframework.org/schema/aop 
+					     http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+		
+		<property name="initialSize" value="0" />
+		<!-- 连接池最大使用连接数量 -->
+		<property name="maxActive" value="20" />
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="0" />
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="60000" />
+	</bean>
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>bea/com/pojo/Lanmut.hbm.xml</value>
+				<value>bea/com/pojo/Yonghut.hbm.xml</value>
+				<value>bea/com/pojo/Wenzhangt.hbm.xml</value>
+				<value>bea/com/pojo/Yonghulogt.hbm.xml</value>
+				<value>bea/com/pojo/Moxingt.hbm.xml</value>
+				<value>bea/com/pojo/Rolet.hbm.xml</value>
+				<value>bea/com/pojo/Bument.hbm.xml</value>
+				<value>bea/com/pojo/Quanxiant.hbm.xml</value></list>
+		</property></bean>
+		
+		<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" />
+        </property>
+       </bean>
+		<tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+             
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="modify*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="*" propagation="SUPPORTS"  read-only="true" />
+        </tx:attributes>
+      </tx:advice>
+		
+		<aop:config proxy-target-class="true">
+        <aop:pointcut id="allManagerMethod" expression="execution(* bea.com.Service..*.*(..))" />
+        <aop:advisor pointcut-ref="allManagerMethod"  advice-ref="txAdvice" />
+       </aop:config>
+       
+       <bean id="dao" class="bea.com.DAO.BaseDAO">
+					<property name="sessionFactory">
+						<ref bean="sessionFactory"/>
+					</property>
+			</bean>
+			<bean id="baseAction" class="bea.com.Action.BaseAction" abstract="true"></bean>
+			
+			<bean id="lanMuGuanLiService" class="bea.com.Service.lanMuGuanLiService">
+		    <property name="dao">
+		        <ref bean="dao"/>
+		    </property>
+		</bean>
+		
+		<bean id="LanMuAction" class="bea.com.Action.LanMuAction" parent="baseAction">
+		    <property name="lanMuGuanLiService">
+		        <ref bean="lanMuGuanLiService"/>
+		    </property>
+		</bean>
+		
+		<bean id="userService" class="bea.com.Service.userService">
+		    <property name="dao">
+		        <ref bean="dao"/>
+		    </property>
+		</bean>
+		
+		<bean id="UserAction" class="bea.com.Action.UserAction" parent="baseAction">
+		    <property name="userService">
+		        <ref bean="userService"/>
+		    </property>
+		</bean>
+		
+		 <bean id="wenZhangService" class="bea.com.Service.WenZhangService">
+			<property name="dao">
+				<ref bean="dao"/>
+			</property>
+		</bean>
+		
+		<bean id="wenZhangAction" class="bea.com.Action.WenZhangAction" parent="baseAction">
+					<property name="wenzhangservice">
+						<ref bean="wenZhangService"/>
+					</property>
+		</bean>
+		
+		<bean id="quanXianGuanLiService" class="bea.com.Service.QuanXianGuanLiService">
+		    <property name="idao">
+		        <ref bean="dao"/>
+		    </property>
+		</bean>
+		
+		<bean id="quanXianGuanLiAction" class="bea.com.Action.QuanXianGuanLiAction" parent="baseAction">
+		    <property name="quanXianGuanLiIService">
+		        <ref bean="quanXianGuanLiService"/>
+		    </property>
+		</bean>
+</beans>

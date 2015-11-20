@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+     <package  name="struts2" extends="json-default" namespace="/">
+     
+      <!--*******************************栏目管理******************************************************  -->
+     <action name="getAllMoXing" class="LanMuAction" method="getAllMoXing">
+            <result type="json">
+              <param name="root">jsArr</param>
+            </result>
+     </action>  
+     
+     <action name="getGenLM" class="LanMuAction" method="getGenLM">
+            <result type="json">
+              <param name="root">jsArr</param>
+            </result>
+     </action>    
+     
+     <action name="getLanMuFather" class="LanMuAction" method="getLanMuFather">
+            <result type="json">
+              <param name="root">jsArr</param>
+            </result>
+     </action> 
+     
+     <action name="removeLanMu" class="LanMuAction" method="removeLanMu">            
+     </action> 
+     
+     <action name="addLanM" class="LanMuAction" method="addLanM">            
+     </action>
+     
+     <action name="addXinLanM" class="LanMuAction" method="addXinLanM">            
+     </action>
+     
+     <action name="editLanM" class="LanMuAction" method="editLanM">            
+     </action>
+     
+     <action name="removePiLiang" class="LanMuAction" method="removePiLiang">            
+     </action>
+     
+     <action name="getEditLM" class="LanMuAction" method="getEditLM">
+            <result type="json">
+              <param name="root">jsArr</param>
+            </result>
+     </action> 
+     
+     <action name="getLanMuFatherbyMX" class="LanMuAction" method="getLanMuFatherbyMX">
+            <result type="json">
+              <param name="root">jsArr</param>
+            </result>
+     </action> 
+     <!--*******************************用户注册与登陆******************************************************  -->
+     <action name="regUser" class="UserAction" method="regUser">            
+     </action>
+      <action name="denglu" class="UserAction" method="denglu">            
+     </action>
+     
+     
+    
+      <action name="getuserId" class="UserAction" method="getuserId">  
+               
+     </action>
+     
+     <action name="tuichu" class="UserAction" method="tuichu">            
+     </action>
+     <!-- ######################################文章管理############################################ -->
+     <action name="getFatherLanMu" class="wenZhangAction" method="getLanMuFather">
+         <result type="json">
+			<param name="root">JSArr</param>
+		</result>
+       </action>
+       
+       <action name="getMoXing" class="wenZhangAction" method="getMoXing">
+         <result type="json">
+			<param name="root">JSArr</param>
+		</result>
+       </action>
+       
+       <action name="getLanMuById" class="wenZhangAction" method="getLanMuById">
+         <result type="json">
+			<param name="root">JSObj</param>
+		</result>
+       </action>
+       
+       
+       <action name="addWenZhang" class="wenZhangAction" method="addWenZhang">
+         <result type="json">
+			<param name="root">MSG</param>
+		</result>
+       </action>
+       
+       <action name="getAllWenZhang" class="wenZhangAction" method="getAllWenZhang">
+         <result type="json">
+			<param name="root">JSObj</param>
+		</result>
+       </action>
+       
+       <action name="getWenZhangByWid" class="wenZhangAction" method="getWenZhangByWid">
+         <result type="json">
+			<param name="root">JSObj</param>
+		</result>
+       </action>
+       
+       <action name="modifyWenZhang" class="wenZhangAction" method="modifyWenZhang">
+         <result type="json">
+			<param name="root">MSG</param>
+		</result>
+       </action>
+       
+       <action name="deleteWenZhang" class="wenZhangAction" method="deleteWenZhang">
+         <result type="json">
+			<param name="root">MSG</param>
+		</result>
+       </action>
+       
+       
+       <action name="modifyshenHeWenZhang" class="wenZhangAction" method="modifyshenHeWenZhang">
+         <result type="json">
+			<param name="root">MSG</param>
+		</result>
+       </action>
+       
+       
+       <action name="getAllWenZhangByLanMuId" class="wenZhangAction" method="getAllWenZhangByLanMuId">
+         <result type="json">
+			<param name="root">JSObj</param>
+		</result>
+       </action>
+       
+         <!--*******************************管理组数据管理******************************************************  -->
+     <action name="getGuanLiZu" class="quanXianGuanLiAction" method="getGuanLiZu">
+            <result type="json">
+              <param name="root">JSArr</param>
+            </result>
+         </action>
+           <action name="getguanliyuan" class="quanXianGuanLiAction" method="getguanliyuan">
+             <result type="json">
+               <param name="root">JSObj</param>
+             </result>
+          </action>
+          <action name="deleteEmployee" method="deleteEmployee" class="quanXianGuanLiAction">
+            <result type="json">
+              <param name="root">MSG</param>
+            </result>
+          </action>
+          <action name="deleteguanlizu" method="deleteguanlizu" class="quanXianGuanLiAction">
+            <result type="json">
+              <param name="root">MSG</param>
+            </result>
+          </action>
+          <action name="getAuthority" class="quanXianGuanLiAction" method="getAuthority">
+             	<result type="json">
+             		<param name="root">JSArr</param>
+             	</result>
+          </action>
+            <action name="addguanliyuanzu" class="quanXianGuanLiAction" method="addguanliyuanzu">
+             	<result type="json">
+             		<param name="root">MSG</param>
+             	</result>
+          </action>
+            <action name="modifyonghu" class="quanXianGuanLiAction" method="modifyonghu">
+             	<result type="json">
+             		<param name="root">MSG</param>
+             	</result>
+          </action>
+           <action name="getBuMen" method="getBuMen" class="quanXianGuanLiAction">
+            <result type="json">
+              <param name="root">JSArr</param>
+            </result>
+          </action>
+          <action name="getRolet" method="getRolet" class="quanXianGuanLiAction">
+            <result type="json">
+              <param name="root">JSArr</param>
+            </result>
+          </action>
+          <action name="getIP" method="getIP" class="quanXianGuanLiAction">
+            <result type="json">
+              <param name="root">JSArr</param>
+            </result>
+          </action>
+           <action name="addyonghu" method="addyonghu" class="quanXianGuanLiAction">
+            <result type="json">
+              <param name="root">MSG</param>
+            </result>
+          </action>
+           <action name="getguanliyuanBygunaliyuanId" class="quanXianGuanLiAction" method="getguanliyuanBygunaliyuanId">
+             	<result type="json">
+             		<param name="root">JSArr</param>
+             	</result>
+          </action>
+</package>
+</struts>    
